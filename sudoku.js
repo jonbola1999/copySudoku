@@ -1,46 +1,27 @@
-const fs = require('fs');
-const { EOL } = require('os');
-
-let readFile = fs.readFileSync('./puzzles.txt', 'utf-8');
-
 function read() {
-  return readFile.trim().split(EOL);
+  const fs = require('fs');
+
+  const puzzlesTxt = './puzzles.txt';
+  const puzzles = fs.readFileSync(puzzlesTxt, 'utf-8');
+  const arrSudoku = puzzles.split('\n');
+  return arrSudoku;
 }
 
-// console.log(read());
+// функция возвращает матрицу судоку БЕЗ заполнения
+function solve(sudokuСontainers, current) {
+  let operating = sudokuСontainers[current].split('');
 
-function solve(sudokuContainer, value) {
-  let game = [];
-
-  for (let i = 0; i < 9; i++) {
-    const row = sudokuContainer[value].slice(i * 9, (i + 1) * 9).split('');
-    game.push(row);
-  }
-
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-      if (game[i][j] === '-') {
-        game[i][j] = Math.floor(Math.random() * 9) + 1 + '';
+  function getBoard() {
+    let board = [];
+    for (let i = 0; i < 9; i++) {
+      board[i] = [];
+      for (let j = 0; j < 9; j++) {
+        board[i][j] = operating.shift();
       }
     }
+    return board;
   }
-  return game;
-}
-console.log(solve(read(), 0));
-
-function isSolved() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Возвращает булевое значение — решено это игровое поле или нет.
-   */
-}
-
-function prettyBoard() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Выводит в консоль/терминал судоку.
-   * Подумай, как симпатичнее его вывести.
-   */
+  return getBoard();
 }
 
 module.exports = {
@@ -49,3 +30,4 @@ module.exports = {
   isSolved,
   prettyBoard,
 };
+
