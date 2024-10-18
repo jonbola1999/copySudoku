@@ -24,4 +24,10 @@ function solve(sudokuСontainers, current) {
   return getBoard();
 }
 
-module.exports = { solve, read };
+module.exports = {
+  read,
+  solve,
+  isSolved,
+  prettyBoard,
+};
+
