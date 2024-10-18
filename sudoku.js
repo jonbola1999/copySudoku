@@ -43,6 +43,7 @@ function prettyBoard() {
    */
 }
 
+
 module.exports = {
   read,
   solve,
